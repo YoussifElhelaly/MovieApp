@@ -1,0 +1,53 @@
+.movieDetails {
+    background-color: red;
+}
+
+
+.img{
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.367);
+    z-index: 5;
+}
+
+.rate .starsOuter  {
+    position: relative;
+    display: inline-block;
+}
+
+.rate .starsInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 0%;
+}
+
+.rate .starsOuter::before {
+    content: "\f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 200;
+    color: #888;
+    font-size: 20px;
+}
+
+.rate .starsInner::before {
+    content: "\f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #eab308;
+    font-size: 20px;
+}
+
+@media (max-width:768px) {
+    .rate .starsInner::before,.rate .starsOuter::before {
+        font-size:15px
+    }
+}

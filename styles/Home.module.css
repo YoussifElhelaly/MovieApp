@@ -1,0 +1,24 @@
+.home {
+    background: url(../IMG/slider-bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.img{
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.367);
+    z-index: 5;
+}
+
+.selectOption {
+    background-color: red !important;
+}

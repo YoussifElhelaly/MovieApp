@@ -1,0 +1,46 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+body {
+  background-color: #020d18;
+  font-family: 'Dosis', sans-serif;
+  color: white;
+  position: relative;
+  text-transform: uppercase;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dd003f;
+  border-radius: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0px 1000px #0f2133 inset;
+  -webkit-text-fill-color: white;
+}
+
+input[type = file]::-webkit-file-upload-button {
+  visibility: hidden;
+}

@@ -1,0 +1,43 @@
+.poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.300);
+}
+
+.poster {
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 0 0 black;
+}
+
+.poster .kind {
+    background-color: #dcf836;
+    color: black;
+    font-weight: 900;
+    position: absolute;
+    width: 100px;
+    text-align: center;
+    transform: rotate(-45deg);
+    left: -30px;
+    top: 10px;
+}
+
+.more {
+    background-color: rgba(0, 0, 0, 0.658);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 55;
+    transition: 0.3s all;
+    opacity: 0;
+}
+
+.card:hover .more {
+    opacity: 1;
+    /* background-color: red; */
+}
