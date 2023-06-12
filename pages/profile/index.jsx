@@ -1,48 +1,57 @@
-import { getAuth , signOut, updateProfile } from "firebase/auth"
-import { getDownloadURL, getStorage , ref, uploadBytesResumable } from "firebase/storage";
-import { useRecoilValue } from "recoil";
+import { getAuth, onAuthStateChanged, signOut, updateProfile } from "firebase/auth"
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useRecoilState, useRecoilValue } from "recoil";
 import LoginState from "../../Atom/loginState";
 import UserInfo from "../../Atom/user";
 import FirebaseApp from "../../FirebaseConfig";
+import { useEffect } from "react";
 // import {storage} from "./firebase"
 export default function Profile() {
 
     const auth = getAuth()
     const user = auth.currentUser
     const storage = getStorage(FirebaseApp)
-    const userInfo = useRecoilValue(UserInfo)
-    const logState = useRecoilValue(LoginState)
-
-    console.log(logState)
-
-    console.log("usxe")
-
+    const [userInfo, setUserInfo] = useRecoilState(UserInfo)
+    const [logState, setLogState] = useRecoilState(LoginState)
+    // let userInfo = {}
     function changePhoto() {
         let file = document.getElementById("file").files[0]
         const storageRef = ref(storage, `/${file.name}`);
         const uploadFile = uploadBytesResumable(storageRef, file)
-        uploadFile.on("state_changed",(snapshot) => {
-            const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)*100)
-            console.log(prog) 
-        },(err) => {
+        uploadFile.on("state_changed", (snapshot) => {
+            const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+            console.log(prog)
+        }, (err) => {
             console.log(err)
-        },() => {
+        }, () => {
             getDownloadURL(uploadFile.snapshot.ref)
-           .then((url) => {
-               updateProfile(user, {photoURL: url})
-           })
-            
+                .then((url) => {
+                    updateProfile(user, { photoURL: url })
+                })
+
         }
         )
     }
-    console.log("eujdxf")
-    return( 
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserInfo(user)
+                setLogState(true)
+            } else {
+                setUserInfo({})
+                setLogState(false)
+
+            }
+        })
+    }, [])
+    return (
         <section className="Profile">
             <div className="container mx-auto pt-[85px] flex justify-evenly ">
                 <div className="profileCard w-2/4 md:w-1/6 rounded sticky top-[100px] h-full bg-[#020d18] border-4 border-[#0f2133] flex flex-col items-center">
                     <img src={userInfo?.photoURL} alt="UserIMG" className="w-[100px] rounded-full h-[100px] object-cover" />
                     <button className="relative w-[120px] h-[40px] my-[20px] bg-[#dd003f] rounded-lg font-semibold cursor-pointer">
-                        <input type={"file"} accept="image/*" className="button left-0 top-0 h-full  w-full absolute cursor-pointer opacity-0" name={"Change Avatar"} id="file" onChange={()=>{changePhoto()}} />
+                        <input type={"file"} accept="image/*" className="button left-0 top-0 h-full  w-full absolute cursor-pointer opacity-0" name={"Change Avatar"} id="file" onChange={() => { changePhoto() }} />
                         Change Photo
                     </button>
                     <div className="details w-full">
@@ -58,10 +67,10 @@ export default function Profile() {
                         <ul className="border-b-2 border-t-2 border-[#0f2133] py-12 px-6">
                             <h2 className="text-sm text-gray-600 font-bold">others</h2>
                             <li className="mt-5 font-bold hover:text-[#dcf836] cursor-pointer transition-all">change password</li>
-                            <li className="mt-5 font-bold hover:text-[#dcf836] cursor-pointer transition-all" onClick={()=>{
+                            <li className="mt-5 font-bold hover:text-[#dcf836] cursor-pointer transition-all" onClick={() => {
                                 signOut(auth)
                             }}>log out</li>
-                            
+
                         </ul>
                     </div>
 
@@ -77,7 +86,7 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
     )
