@@ -32,19 +32,6 @@ export default function Profile() {
         }
         )
     }
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUserInfo(user)
-                setLogState(true)
-            } else {
-                setUserInfo({})
-                setLogState(false)
-
-            }
-        })
-    }, [])
     return (
         <section className="Profile">
             <div className="container mx-auto pt-[85px] flex justify-evenly ">
