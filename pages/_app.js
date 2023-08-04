@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { RecoilRoot } from 'recoil'
 import '../styles/globals.css'
 import Navbar from './Components/navbar/navbar'
-import privateRoute from '../middleware'
 
 export default function App({ Component, pageProps }) {
 
@@ -14,11 +13,11 @@ export default function App({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"></link>
       </Head>
-      <RecoilRoot> 
-        <Navbar/>
+      <RecoilRoot>
+        <Navbar />
         <Component {...pageProps} />
       </RecoilRoot>
     </>
   )
-  
+
 }

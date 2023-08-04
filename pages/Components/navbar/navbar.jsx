@@ -3,7 +3,7 @@ import styles from '../../../styles/navbar.module.css'
 import logo from '../../../IMG/logo1.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import LoginState from '../../../Atom/loginState'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { useRouter } from 'next/router'
@@ -12,19 +12,10 @@ import UserInfo from '../../../Atom/user'
 function Navbar() {
 
     const router = useRouter();
-    const auth = getAuth()
-    const user = auth.currentUser
-    const userInfo = useRecoilValue(UserInfo)
     const [mobileNav, setMobileNav] = useState(true)
     const logState = useRecoilValue(LoginState)
-    // console.log(logState)
-    // onAuthStateChanged(auth, (user) => {
-    //     if(user) {
-    //         setLogState(true)
-    //     } else {
-    //         setLogState(false)
-    //     }
-    // })
+    const userInfo = useRecoilValue(UserInfo)
+
 
     return (
         <nav className={`${styles.nav} nav fixed w-full bg-[#0f2133] z-50`}>
@@ -65,11 +56,11 @@ function Navbar() {
                         {
                             logState ?
                                 <Link href="../profile" className="user flex items-center justify-end">
-                                    <h2 className='mr-4'>{userInfo.displayName}</h2>
-                                    <img src="https://lh3.googleusercontent.com/a/AEdFTp51NtOdjuF5y9mX2A2Of5JVEDh1Yb1-iGLzrtTKdA=s96-c" alt="user photo" className='w-[50px] rounded-full' />
+                                    <h2 className='mr-4'>{userInfo?.displayName}</h2>
+                                    <img src={userInfo?.photoURL} alt="user photo" className='w-[50px] rounded-full' />
                                 </Link>
                                 : <div className="login text-end">
-                                    <Link href="../login">LOG IN</Link>
+                                    <Link href="../../../login">LOG IN</Link>
                                     <button className="bg-[#dd003f] rounded-full px-5 h-fit py-2 ml-4">SignUp</button>
                                 </div>
                         }

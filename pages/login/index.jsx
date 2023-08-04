@@ -1,38 +1,29 @@
-import Link from "next/link";
-import FirebaseApp from "../../FirebaseConfig";
 import styles from '../../styles/Home.module.css'
 import { signOut, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, FacebookAuthProvider, getRedirectResult } from "firebase/auth"
 import Swal from "sweetalert2";
 import { useRecoilState, useRecoilValue } from "recoil";
 import LoginState from "../../Atom/loginState";
-import { NextResponse } from "next/server";
+
 import UserInfo from "../../Atom/user";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import FirebaseApp from '../../FirebaseConfig';
+import { Router, useRouter } from 'next/router';
 
 export default function login() {
 
-
-
-
-
-    // const db = getFirestore(FirebaseApp)
-    const auth = getAuth()
+    const auth = getAuth(FirebaseApp)
     const google = new GoogleAuthProvider()
     const [LogState, setLogState] = useRecoilState(LoginState)
     const face = new FacebookAuthProvider()
     const [userInfo, setUserInfo] = useRecoilState(UserInfo)
+    let router = useRouter()
 
-    // onAuthStateChanged(auth ,(user) => {
-    //     if(user) {
-    //         console.log("ana hna yasta")
-    //         setLogState(true)
-    //     } else {
-    //         console.log("8or yalla mn hna")
-    //         setLogState(false)
-    //     }
-    // })
-    console.log(LogState)
-    console.log(auth.currentUser)
+
+    useEffect(() => {
+        if (LogState === true) {
+            router.push("/profile")
+        }
+    }, [LogState])
 
     async function login_pro(email, password) {
         try {
@@ -44,11 +35,6 @@ export default function login() {
                 showConfirmButton: false,
                 timer: 1500
             })
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    setUserInfo(user)
-                }
-            })
             setLogState(true)
             localStorage.setItem("log", true)
         } catch (error) {
@@ -59,6 +45,14 @@ export default function login() {
             })
         }
     }
+
+
+    useEffect(() => {
+        onAuthStateChanged(auth, user => {
+            const userCopy = JSON.parse(JSON.stringify(user));
+            setUserInfo(userCopy);
+        })
+    }, [setUserInfo])
 
     function loginVal(email, pass) {
         if (email.value === "" || pass.value === "") {
@@ -82,11 +76,8 @@ export default function login() {
         }
         else {
             login_pro(email.value, pass.value)
-            console.log(auth.currentUser)
         }
     }
-
-
 
     return (
         <section className={`${styles.home} login h-screen`}>
@@ -109,7 +100,14 @@ export default function login() {
                             loginVal(email, password)
                         }}>Log In</button>
                         <p onClick={() => {
-                            signOut(auth)
+                            signOut(auth).then(() => {
+                                console.log("ana tl3t bra")
+                                console.log(userInfo)
+
+                            }).catch((error) => {
+                                console.log("ana lsa gwa haha")
+                            });
+
                         }}>logout </p>
                     </div>
                 </div>
@@ -126,13 +124,8 @@ export default function login() {
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                                getRedirectResult(auth)
-                                    .then((result) => {
-                                        setUserInfo(result.user);
-                                        console.log("user")
-                                    }).catch((error) => {
-                                        console.log(error)
-                                    });
+                                setLogState(true)
+                                console.log(userInfo)
                             } catch (error) {
                                 console.log(error)
                             }

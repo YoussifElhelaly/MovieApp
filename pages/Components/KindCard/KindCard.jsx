@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
-import poster from '../../../IMG/Poster1.jpg'
+// import poster from '../../../IMG/Poster1.jpg'
 import styles from '../../../styles/KindCard.module.css'
 
 
