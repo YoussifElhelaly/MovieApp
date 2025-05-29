@@ -99,21 +99,11 @@ export default function login() {
                             let password = document.getElementById("password")
                             loginVal(email, password)
                         }}>Log In</button>
-                        <p onClick={() => {
-                            signOut(auth).then(() => {
-                                console.log("ana tl3t bra")
-                                console.log(userInfo)
-
-                            }).catch((error) => {
-                                console.log("ana lsa gwa haha")
-                            });
-
-                        }}>logout </p>
                     </div>
                 </div>
                 <div className="social my-5">
                     <h2>You can Login with :</h2>
-                    <div className="icons flex justify-between items-center">
+                    <div className="icons flex justify-center items-center">
                         <i class="fa-brands fa-google text-4xl my-5 text-[#dd4b39] cursor-pointer" onClick={async () => {
                             try {
                                 await signInWithPopup(auth, google)
@@ -130,7 +120,7 @@ export default function login() {
                                 console.log(error)
                             }
                         }}></i>
-                        <i class="fa-brands fa-facebook text-4xl text-[#1877f2] cursor-pointer" onClick={async () => {
+                        {/* <i class="fa-brands fa-facebook text-4xl text-[#1877f2] cursor-pointer" onClick={async () => {
                             try {
                                 await signInWithPopup(auth, face)
                                 Swal.fire({
@@ -143,7 +133,7 @@ export default function login() {
                             } catch (error) {
                                 console.log(error)
                             }
-                        }}></i>
+                        }}></i> */}
                     </div>
                 </div>
             </div>

@@ -22,8 +22,6 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => (SetSliderHomemovies(data.results)))
     // .then(() => setIsLoading(true))
-
-
   }, [])
 
   useEffect(() => {
@@ -36,10 +34,15 @@ export default function Home() {
     <>
       <section className={`${styles.home} home h-screen py-16`}>
         <div className="container mx-auto xl:p-20 px-2 py-10 flex h-full items-center ">
-          <Swiper navigation={true} modules={[Navigation]} className="mySwiper" loop={true}>
+          <Swiper
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+            loop={true}
+            >
             {SliderHomeMovies.slice(0, 3).map((movie) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide >
                   <HomeSliderCard movie={movie} loading={isLoading} />
                 </SwiperSlide>
               )

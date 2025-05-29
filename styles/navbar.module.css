@@ -1,3 +1,5 @@
+
+
 @media (max-width:1024px) {
     .nav {
         background-color: #0f2133;
@@ -17,3 +19,7 @@
         height: 300px;
     }
 }
+
+/* .nav-link { 
+    @apply m-5 text-md font-semibold
+} */

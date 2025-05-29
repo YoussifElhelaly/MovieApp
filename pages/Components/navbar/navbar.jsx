@@ -30,11 +30,9 @@ function Navbar() {
                 }></i>
                 <div className={`${mobileNav ? "" : styles.active} ${styles.res} lg:flex items-center justify-between w-full pl-2`} id="mobile">
                     <ul className="lg:flex mr-auto">
-                        <Link href={"../"} className="m-5 text-md font-semibold">Home</Link>
-                        <Link href={"../movie"} className="m-5 text-md font-semibold">Movies</Link>
-                        <Link href={"../tv"} className="m-5 text-md font-semibold">Celebrities</Link>
-                        <li className="m-5 text-md font-semibold">News</li>
-                        <li className="m-5 text-md font-semibold">Community</li>
+                        <Link href={"/"} className="m-5 text-md font-semibold">Home</Link>
+                        <Link href={"/movie"} className="m-5 text-md font-semibold">Movies</Link>
+                        <Link href={"/tv"} className="m-5 text-md font-semibold">Celebrities</Link>
                     </ul>
                     <div className="right flex items-center justify-between flex-1 ">
                         <div className="search ml-auto mr-4 relative border-[1px] border-white rounded-md overflow-hidden">
@@ -57,11 +55,13 @@ function Navbar() {
                             logState ?
                                 <Link href="../profile" className="user flex items-center justify-end">
                                     <h2 className='mr-4'>{userInfo?.displayName}</h2>
-                                    <img src={userInfo?.photoURL} alt="user photo" className='w-[50px] rounded-full' />
+                                    <div className='w-[50px] h-[50px] rounded-full'>
+                                    <img src={userInfo?.photoURL} alt="user photo" className='w-full h-full object-cover rounded-full' />
+                                    </div>
                                 </Link>
                                 : <div className="login text-end">
-                                    <Link href="../../../login">LOG IN</Link>
-                                    <button className="bg-[#dd003f] rounded-full px-5 h-fit py-2 ml-4">SignUp</button>
+                                    <Link href="/login">LOG IN</Link>
+                                    <Link href={"/signup"} className="bg-[#dd003f] rounded-full px-5 h-fit py-2 ml-4">SignUp</Link>
                                 </div>
                         }
                     </div>

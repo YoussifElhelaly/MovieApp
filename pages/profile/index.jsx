@@ -59,9 +59,9 @@ export default function Profile() {
         console.log(userLater)
     }, [userFav, userLater])
 
-    useEffect(() => {
-        handelUserData()
-    }, [])
+    // useEffect(() => {
+    //     handelUserData()
+    // }, [])
 
     function handelCurrentPage() {
         if (currentPage == "profileInfo") {
@@ -132,7 +132,6 @@ export default function Profile() {
         } else {
             setUserFav(docSnap.data().fav)
             setUserLater(docSnap.data().watchLater)
-
         }
     }
 

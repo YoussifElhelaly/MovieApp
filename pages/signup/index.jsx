@@ -115,7 +115,7 @@ export default function signup() {
                         }}>logout </p>
                     </div>
                 </div>
-                <div className="social my-5">
+                {/* <div className="social my-5">
                     <h2>You can SignUp with :</h2>
                     <div className="icons flex justify-between items-center">
                         <i class="fa-brands fa-google text-4xl my-5 text-[#dd4b39]" onClick={async () => {
@@ -134,7 +134,7 @@ export default function signup() {
                         }}></i>
                         <i class="fa-brands fa-facebook text-4xl text-[#1877f2]"></i>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     )

@@ -55,7 +55,7 @@ function Kind(props) {
                 </ul>
                 <div className="box py-5">
                 <Swiper 
-                spaceBetween={0}
+                spaceBetween={20}
                 navigation={true} 
                 modules={[Navigation, Pagination]} 
                 loop={true}

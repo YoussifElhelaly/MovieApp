@@ -57,7 +57,7 @@ export default function () {
                         </select>
                     </div>
                 </div>
-                <div className="list flex flex-wrap gap-[25px]">
+                <div className="parent grid grid-cols-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-5 py-[50px] max-md:py-[10px]">
                     {MovieList?.results?.map((movie)=>{
                         return(
                             <KindCard kind="movie" movie={movie} loading={true}/>
